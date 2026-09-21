@@ -1,2 +1,54 @@
-# project-management-system
-Enterprise project management system for managing projects, teams, tasks, budgets, meetings, reports and activities.
+# نظام إدارة المشاريع للمؤسسة
+
+نظام ويب مؤسسي لإدارة المشاريع والفرق والمهام والميزانيات والمواعيد والتقارير، بواجهة عربية (RTL) متجاوبة.
+
+## البنية
+
+- **Frontend** — Vite + React + TypeScript + Tailwind + Chart.js (`/`)
+- **Backend** — Node.js + Express REST API (`/server`)
+- **قاعدة البيانات** — PostgreSQL (WASM عبر PGlite، يعمل داخل خادم الـ API مع حفظ البيانات على القرص في `server/.pgdata`)
+
+التدفق: `Frontend → REST API → Business Logic → Database` (لا تتصل الواجهة بقاعدة البيانات مباشرة).
+
+## التشغيل
+
+```bash
+# الواجهة (تثبيت + تشغيل)
+npm install
+npm run dev
+
+# الخادم
+cd server
+npm install
+node src/index.js
+```
+
+الواجهة توجّه طلبات `/api` إلى الخادم تلقائياً في بيئة التطوير.
+
+## حسابات تجريبية
+
+كلمة المرور لكل الحسابات: `123456`
+
+| الدور | البريد |
+| --- | --- |
+| مدير النظام | admin@company.com |
+| مدير مشروع | manager@company.com |
+| قائد فريق | leader@company.com |
+| عضو فريق | member@company.com |
+
+## الوحدات
+
+المصادقة، المستخدمون، الأدوار والصلاحيات (RBAC)، لوحة التحكم، المشاريع، أعضاء المشاريع، المهام، لوحة كانبان (سحب وإفلات)، التقويم، الميزانيات والمصروفات، الاجتماعات، الإشعارات، التقارير (مع تصدير CSV)، سجل الأنشطة، البحث والتصفية والفرز، والإعدادات.
+
+## الصلاحيات
+
+1. **System Administrator** — إدارة المستخدمين والأدوار وسجل الأنشطة.
+2. **Project Manager** — إنشاء وإدارة المشاريع التي يديرها.
+3. **Team Leader** — إدارة المهام داخل نطاقه.
+4. **Team Member** — مشاهدة مهامه وتحديث حالتها وتقدمها.
+
+الصلاحيات تُفرض على الخادم، وليس فقط عبر إخفاء الأزرار في الواجهة.
+
+## التوثيق
+
+وثيقة المتطلبات الكاملة في `.attachments/Project_Management_System_Specification_AR.txt`.
