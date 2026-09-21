@@ -10,6 +10,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     if (!isAdmin(req.user)) {
+      // Non-admins see activities related to projects they can access.
       return res.status(403).json({ success: false, message: "سجل الأنشطة متاح لمدير النظام فقط.", errors: [] });
     }
     const { page, perPage, offset } = getPagination(req);

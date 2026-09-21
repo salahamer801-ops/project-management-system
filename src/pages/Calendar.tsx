@@ -47,8 +47,9 @@ export default function CalendarPage() {
     const year = cursor.getFullYear();
     const month = cursor.getMonth();
     const first = new Date(year, month, 1);
-    let offset = first.getDay();
-    const satOffset = (offset + 1) % 7;
+    // Saturday = 0 in our grid (JS getDay: 0=Sun)
+    let offset = first.getDay(); // 0 Sun .. 6 Sat
+    const satOffset = (offset + 1) % 7; // shift so Saturday=0
     const start = new Date(year, month, 1 - satOffset);
     const arr: Date[] = [];
     for (let i = 0; i < 42; i++) {
